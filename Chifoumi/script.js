@@ -16,7 +16,7 @@ function jouer(choixJoueur) {
     document.querySelector('.result_ordinateur img').src = `img/${choixOrdinateur}.jpg`;
     document.querySelector('.result_ordinateur img').alt = choixOrdinateur;
 
-    // Déterminer le gagnant
+    // Calculer les scores
     if (choixJoueur === choixOrdinateur) {
         alert("Égalité ! Rejouez.");
     } else if (
@@ -25,10 +25,39 @@ function jouer(choixJoueur) {
         (choixJoueur === "scissor" && choixOrdinateur === "paper")
     ) {
         scoreJoueur++;
-        document.getElementById('score-joueur').textContent = `Joueur: ${scoreJoueur}`;
     } else {
         scoreOrdinateur++;
-        document.getElementById('score-ordinateur').textContent = `Ordinateur: ${scoreOrdinateur}`;
+    }
+
+    // Mettre à jour les scores
+    document.getElementById('score-joueur').textContent = `Joueur: ${scoreJoueur}`;
+    document.getElementById('score-ordinateur').textContent = `Ordinateur: ${scoreOrdinateur}`;
+
+    // Mettre à jour les couleurs des scores
+    updateScoreColors();
+}
+
+/**
+ * Met à jour les couleurs des scores en fonction des valeurs
+ */
+function updateScoreColors() {
+    const scoreJoueurElement = document.getElementById('score-joueur');
+    const scoreOrdinateurElement = document.getElementById('score-ordinateur');
+
+    if (scoreJoueur > scoreOrdinateur) {
+        scoreJoueurElement.classList.add('gagne');
+        scoreJoueurElement.classList.remove('perd');
+        scoreOrdinateurElement.classList.add('perd');
+        scoreOrdinateurElement.classList.remove('gagne');
+    } else if (scoreOrdinateur > scoreJoueur) {
+        scoreOrdinateurElement.classList.add('gagne');
+        scoreOrdinateurElement.classList.remove('perd');
+        scoreJoueurElement.classList.add('perd');
+        scoreJoueurElement.classList.remove('gagne');
+    } else {
+        // Égalité - enlever les couleurs
+        scoreJoueurElement.classList.remove('gagne', 'perd');
+        scoreOrdinateurElement.classList.remove('gagne', 'perd');
     }
 }
 
@@ -45,6 +74,10 @@ function resetGame() {
 
     // Masquer les résultats
     document.querySelector('.resultat').style.display = 'none';
+
+    // Supprimer les classes de style
+    document.getElementById('score-joueur').classList.remove('gagne', 'perd');
+    document.getElementById('score-ordinateur').classList.remove('gagne', 'perd');
 
     // Vider les images des résultats
     document.querySelector('.result_joueur img').src = "";
