@@ -2,10 +2,7 @@
 let scoreJoueur = 0;
 let scoreOrdinateur = 0;
 
-/**
- * Fonction qui gère le jeu pour un tour
- * @param {string} choixJoueur - Le choix du joueur ("rock", "paper", "scissor").
- */
+/******* Fonction qui gère le jeu pour un tour choixJoueur - Le choix du joueur ("rock", "paper", "scissor").******/
 function jouer(choixJoueur) {
     const choixOrdinateur = ["rock", "paper", "scissor"][Math.floor(Math.random() * 3)];
 
@@ -37,9 +34,7 @@ function jouer(choixJoueur) {
     updateScoreColors();
 }
 
-/**
- * Met à jour les couleurs des scores en fonction des valeurs
- */
+/*******Met à jour les couleurs des scores en fonction des valeurs*****/
 function updateScoreColors() {
     const scoreJoueurElement = document.getElementById('score-joueur');
     const scoreOrdinateurElement = document.getElementById('score-ordinateur');
@@ -61,9 +56,7 @@ function updateScoreColors() {
     }
 }
 
-/**
- * Fonction pour réinitialiser le jeu.
- */
+/******Fonction pour réinitialiser le jeu.******/
 function resetGame() {
     scoreJoueur = 0;
     scoreOrdinateur = 0;
@@ -84,10 +77,8 @@ function resetGame() {
     document.querySelector('.result_ordinateur img').src = "";
 }
 
-// Attacher les événements "click" aux éléments
+//  les événements "click"
 document.querySelector('.rock').addEventListener('click', () => jouer('rock'));
 document.querySelector('.paper').addEventListener('click', () => jouer('paper'));
 document.querySelector('.scissor').addEventListener('click', () => jouer('scissor'));
-
-// Attacher l'événement "click" au bouton de reset
 document.getElementById('resetBtn').addEventListener('click', resetGame);
